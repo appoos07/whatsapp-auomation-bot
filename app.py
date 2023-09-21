@@ -88,17 +88,14 @@ def reply():
             cake_name = selected_cake["name"]
             cake_image_url = selected_cake["image_url"]
 
-            # Update user status and selected item
             users.update_one({"number": number}, {"$set": {"status": "address"}})
             users.update_one({"number": number}, {"$set": {"item": cake_name}})
 
-            # Create a response message with the cake name and image
             message = (
                 f"Excellent choice!\nYou've selected {cake_name} 😊\n"
                 f"Please enter your address to confirm the order."
             )
 
-            # Create a Twilio MessagingResponse and send the message with media (image)
             res.message(message).media(cake_image_url)
 
         else:
@@ -121,4 +118,4 @@ def reply():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(port=5000)
